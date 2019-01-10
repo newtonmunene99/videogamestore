@@ -7,8 +7,10 @@
 
 import '@stencil/core';
 
+import '@stencil/router';
 import '@ionic/core';
 import 'ionicons';
+import '@stencil/state-tunnel';
 
 
 export namespace Components {
@@ -25,6 +27,22 @@ export namespace Components {
 
   interface AppRoot {}
   interface AppRootAttributes extends StencilHTMLAttributes {}
+
+  interface GameCard {
+    'game': any;
+  }
+  interface GameCardAttributes extends StencilHTMLAttributes {
+    'game'?: any;
+  }
+
+  interface StoreCategories {}
+  interface StoreCategoriesAttributes extends StencilHTMLAttributes {}
+
+  interface StoreHome {}
+  interface StoreHomeAttributes extends StencilHTMLAttributes {}
+
+  interface StoreSearch {}
+  interface StoreSearchAttributes extends StencilHTMLAttributes {}
 }
 
 declare global {
@@ -32,12 +50,20 @@ declare global {
     'AppHome': Components.AppHome;
     'AppProfile': Components.AppProfile;
     'AppRoot': Components.AppRoot;
+    'GameCard': Components.GameCard;
+    'StoreCategories': Components.StoreCategories;
+    'StoreHome': Components.StoreHome;
+    'StoreSearch': Components.StoreSearch;
   }
 
   interface StencilIntrinsicElements {
     'app-home': Components.AppHomeAttributes;
     'app-profile': Components.AppProfileAttributes;
     'app-root': Components.AppRootAttributes;
+    'game-card': Components.GameCardAttributes;
+    'store-categories': Components.StoreCategoriesAttributes;
+    'store-home': Components.StoreHomeAttributes;
+    'store-search': Components.StoreSearchAttributes;
   }
 
 
@@ -59,16 +85,48 @@ declare global {
     new (): HTMLAppRootElement;
   };
 
+  interface HTMLGameCardElement extends Components.GameCard, HTMLStencilElement {}
+  var HTMLGameCardElement: {
+    prototype: HTMLGameCardElement;
+    new (): HTMLGameCardElement;
+  };
+
+  interface HTMLStoreCategoriesElement extends Components.StoreCategories, HTMLStencilElement {}
+  var HTMLStoreCategoriesElement: {
+    prototype: HTMLStoreCategoriesElement;
+    new (): HTMLStoreCategoriesElement;
+  };
+
+  interface HTMLStoreHomeElement extends Components.StoreHome, HTMLStencilElement {}
+  var HTMLStoreHomeElement: {
+    prototype: HTMLStoreHomeElement;
+    new (): HTMLStoreHomeElement;
+  };
+
+  interface HTMLStoreSearchElement extends Components.StoreSearch, HTMLStencilElement {}
+  var HTMLStoreSearchElement: {
+    prototype: HTMLStoreSearchElement;
+    new (): HTMLStoreSearchElement;
+  };
+
   interface HTMLElementTagNameMap {
     'app-home': HTMLAppHomeElement
     'app-profile': HTMLAppProfileElement
     'app-root': HTMLAppRootElement
+    'game-card': HTMLGameCardElement
+    'store-categories': HTMLStoreCategoriesElement
+    'store-home': HTMLStoreHomeElement
+    'store-search': HTMLStoreSearchElement
   }
 
   interface ElementTagNameMap {
     'app-home': HTMLAppHomeElement;
     'app-profile': HTMLAppProfileElement;
     'app-root': HTMLAppRootElement;
+    'game-card': HTMLGameCardElement;
+    'store-categories': HTMLStoreCategoriesElement;
+    'store-home': HTMLStoreHomeElement;
+    'store-search': HTMLStoreSearchElement;
   }
 
 

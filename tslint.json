@@ -1,0 +1,37 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint-stencil"],
+  "rules": {
+    "lifecycle-order": [true, "call-order"],
+    "components-per-file": [true, 1],
+    "component-member-order": [
+      true,
+      {
+        "order": [
+          "own-prop",
+          "element",
+          "state",
+          "watched-state",
+          "internal-prop",
+          "prop",
+          "watched-prop",
+          "event",
+          "lifecycle",
+          "listen",
+          "method",
+          "own-method",
+          "stencil-method"
+        ],
+        "alphabetical": true
+      }
+    ],
+    "stencil-method-order": [
+      true,
+      {
+        "order": ["hostData", "render"]
+      }
+    ]
+  },
+  "jsRules": {},
+  "rulesDirectory": []
+}

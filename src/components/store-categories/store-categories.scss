@@ -1,0 +1,8 @@
+div.game-cards {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  game-card {
+    width: 50%;
+  }
+}

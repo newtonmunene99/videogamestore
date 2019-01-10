@@ -1,29 +1,63 @@
-import { Component } from '@stencil/core';
+import { Component, State, Prop } from "@stencil/core";
 
 @Component({
-  tag: 'app-home',
-  styleUrl: 'app-home.css'
+  tag: "app-home",
+  styleUrl: "app-home.scss"
 })
 export class AppHome {
+  @State() isPaneVisible: boolean = false;
+
+  @Prop({ connect: "ion-menu-controller" })
+  menuCtrl: HTMLIonMenuControllerElement;
 
   render() {
-    return [
-      <ion-header>
-        <ion-toolbar color="primary">
-          <ion-title>Home</ion-title>
-        </ion-toolbar>
-      </ion-header>,
-
-      <ion-content padding>
-        <p>
-          Welcome to the PWA Toolkit. You can use this starter to build entire
-          apps with web components using Stencil and ionic/core! Check out the
-          README for everything that comes in this starter out of the box and
-          check out our docs on <a href="https://stenciljs.com">stenciljs.com</a> to get started.
-        </p>
-
-        <ion-button href="/profile/ionic" expand="block">Profile page</ion-button>
-      </ion-content>
-    ];
+    return (
+      <ion-split-pane
+        content-id="menu-content"
+        when="md"
+        onIonChange={ev => {
+          typeof ev.detail.visible == "boolean"
+            ? (this.isPaneVisible = ev.detail.visible)
+            : null;
+        }}
+      >
+        <ion-menu content-id="menu-content" side="start" menu-id="side-menu">
+          <div class="links">
+            <ion-item detail>
+              <ion-anchor href="/" routerDirection="back">
+                home
+              </ion-anchor>
+            </ion-item>
+            <ion-item detail>
+              <ion-anchor href="/profile/newton" routerDirection="forward">
+                profile
+              </ion-anchor>
+            </ion-item>
+          </div>
+        </ion-menu>
+        <div id="menu-content">
+          <ion-header mode="ios">
+            <ion-toolbar mode="ios">
+              <ion-buttons slot="start">
+                <ion-button
+                  hidden={this.isPaneVisible}
+                  onClick={() => {
+                    this.menuCtrl.componentOnReady().then(ctrl => {
+                      ctrl.open("side-menu");
+                    });
+                  }}
+                >
+                  <ion-icon slot="icon-only" name="menu" />
+                </ion-button>
+              </ion-buttons>
+              <ion-title>VIDEOGAMESTORE</ion-title>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content>
+            <ion-nav />
+          </ion-content>
+        </div>
+      </ion-split-pane>
+    );
   }
 }

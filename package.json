@@ -1,8 +1,8 @@
 {
-  "name": "videogamestore",
+  "name": "stencil-pwa",
   "private": true,
   "version": "0.0.1",
-  "description": "videogamestore",
+  "description": "stencil-pwa",
   "license": "MIT",
   "files": [
     "dist/"
@@ -15,9 +15,14 @@
   },
   "dependencies": {
     "@ionic/core": "4.0.0-rc.0",
-    "@stencil/sass": "^0.1.1"
+    "@stencil/router": "^0.3.2",
+    "@stencil/sass": "^0.1.1",
+    "@vaadin/router": "^1.2.0",
+    "rxjs": "^6.3.3"
   },
   "devDependencies": {
-    "@stencil/core": "0.16.1"
+    "@stencil/core": "0.16.1",
+    "tslint": "^5.12.0",
+    "tslint-stencil": "^1.0.0"
   }
 }

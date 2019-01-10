@@ -1,6 +1,6 @@
 {
-  "name": "videogamestore",
-  "short_name": "videogamestore",
+  "name": "uzastuff-admin",
+  "short_name": "uzastuff-admin",
   "start_url": "/",
   "display": "standalone",
   "icons": [{

@@ -1,12 +1,12 @@
-import { Component, Prop, Listen } from '@stencil/core';
+import { Component, Prop, Listen } from "@stencil/core";
 
 @Component({
-  tag: 'app-root',
-  styleUrl: 'app-root.css'
+  tag: "app-root",
+  styleUrl: "app-root.css"
 })
 export class AppRoot {
-
-  @Prop({ connect: 'ion-toast-controller' }) toastCtrl: HTMLIonToastControllerElement;
+  @Prop({ connect: "ion-toast-controller" })
+  toastCtrl: HTMLIonToastControllerElement;
 
   /**
    * Handle service worker updates correctly.
@@ -17,12 +17,12 @@ export class AppRoot {
    * so that the new service worker can take over
    * and serve the fresh content
    */
-  @Listen('window:swUpdate')
+  @Listen("window:swUpdate")
   async onSWUpdate() {
     const toast = await this.toastCtrl.create({
-      message: 'New version available',
+      message: "New version available",
       showCloseButton: true,
-      closeButtonText: 'Reload'
+      closeButtonText: "Reload"
     });
     await toast.present();
     await toast.onWillDismiss();
@@ -33,10 +33,18 @@ export class AppRoot {
     return (
       <ion-app>
         <ion-router useHash={false}>
-          <ion-route url="/" component="app-home" />
-          <ion-route url="/profile/:name" component="app-profile" />
+          <ion-route url="/" component="app-home">
+            <ion-route component="store-home">
+              <ion-route component="store-categories" />
+              <ion-route url="/store/:category" component="store-categories" />
+            </ion-route>
+            <ion-route-redirect from="/search" to="/" />
+            <ion-route url="/search" component="store-search" />
+
+            <ion-route url="/profile/:name" component="app-profile" />
+          </ion-route>
         </ion-router>
-        <ion-nav />
+        <ion-nav animated />
       </ion-app>
     );
   }
