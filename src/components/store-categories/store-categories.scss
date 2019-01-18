@@ -3,6 +3,7 @@ div.game-cards {
   display: flex;
   flex-flow: row wrap;
   game-card {
-    width: 50%;
+    width: 24%;
+    margin: 0.5%;
   }
 }

@@ -6,7 +6,8 @@ import { Component, State, Prop } from "@stencil/core";
 })
 export class AppHome {
   @State() isPaneVisible: boolean = false;
-
+  @State() isSearching: boolean = false;
+  @State() searchQuery: string;
   @Prop({ connect: "ion-menu-controller" })
   menuCtrl: HTMLIonMenuControllerElement;
 
@@ -52,12 +53,126 @@ export class AppHome {
               </ion-buttons>
               <ion-title>VIDEOGAMESTORE</ion-title>
             </ion-toolbar>
+            <ion-toolbar>
+              <ion-searchbar
+                animated
+                mode="ios"
+                onIonChange={(ev: any) => (this.searchQuery = ev.target.value)}
+                onIonCancel={() => {
+                  this.searchQuery = null;
+                }}
+                onIonClear={() => {
+                  this.searchQuery = null;
+                }}
+              />
+            </ion-toolbar>
           </ion-header>
           <ion-content>
-            <ion-nav />
+            <div
+              hidden={this.searchQuery ? false : true}
+              class="search-results-wrapper"
+            >
+              <div class="header">
+                <h3>Search Results</h3>
+              </div>
+              {this.searchQuery ? (
+                <p>searching for {this.searchQuery}</p>
+              ) : (
+                <p>Please enter a search query</p>
+              )}
+            </div>
+            <ion-slides
+              class="banner-slides"
+              ref={(slide: HTMLIonSlidesElement) => {
+                slide.options = { autoplay: true, loop: true };
+              }}
+            >
+              <ion-slide>
+                <img src="../../assets/images/banner.png" alt="" />
+              </ion-slide>
+              <ion-slide>
+                <img src="../../assets/images/banner1.png" alt="" />
+              </ion-slide>
+            </ion-slides>
+            <div class="latest-games-slides">
+              <h2>Recently Added</h2>
+              <ion-slides
+                ref={(slide: HTMLIonSlidesElement) => {
+                  slide.options = {
+                    autoplay: true,
+
+                    loop: true,
+
+                    breakpoints: {
+                      // when window width is >= 320px
+                      320: {
+                        slidesPerView: 2,
+                        spaceBetween: 20
+                      },
+                      // when window width is >= 480px
+                      480: {
+                        slidesPerView: 3,
+                        spaceBetween: 30
+                      },
+                      // when window width is >= 640px
+                      640: {
+                        slidesPerView: 4,
+                        spaceBetween: 40
+                      },
+                      700: {
+                        slidesPerView: 5,
+                        spaceBetween: 10
+                      }
+                    }
+                  };
+                }}
+              >
+                <ion-slide>
+                  <game-card
+                    game={{
+                      title: "Fifa 2019",
+                      price: "60$",
+                      platform: "PS4",
+                      images: ["../../assets/images/fifa.jpg"]
+                    }}
+                  />
+                </ion-slide>
+                <ion-slide>
+                  <game-card
+                    game={{
+                      title: "Fifa 2019",
+                      price: "60$",
+                      platform: "PS4",
+                      images: ["../../assets/images/fifa.jpg"]
+                    }}
+                  />
+                </ion-slide>
+                <ion-slide>
+                  <game-card
+                    game={{
+                      title: "Fifa 2019",
+                      price: "60$",
+                      platform: "PS4",
+                      images: ["../../assets/images/fifa.jpg"]
+                    }}
+                  />
+                </ion-slide>
+                <ion-slide>
+                  <game-card
+                    game={{
+                      title: "Fifa 2019",
+                      price: "60$",
+                      platform: "PS4",
+                      images: ["../../assets/images/fifa.jpg"]
+                    }}
+                  />
+                </ion-slide>
+              </ion-slides>
+            </div>
           </ion-content>
         </div>
       </ion-split-pane>
     );
   }
 }
+//{ <div class="store-home-nav">gg</div> }
